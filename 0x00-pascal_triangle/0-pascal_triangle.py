@@ -1,33 +1,23 @@
 #!/usr/bin/python3
+"""
+Create a function def pascal_triangle(n) that returns a list of lists of
+ integers representing the Pascal’s triangle of n:
+  * Returns an empty list if n <= 0
+  * You can assume n will be always an integer
+"""
+
+
 def pascal_triangle(n):
-    """
-    Generate Pascal's triangle of height n
-    """
-    if n <= 0:
-        return []
-    
-    triangle = []  # This will contain the entire triangle
-    
-    for i in range(n):
-        row = [None for _ in range(i + 1)]  # Initialize the row with None values
-        row[0], row[-1] = 1, 1  # First and last elements of each row are 1
-        
-        # For each element in between, calculate the sum of the two elements above it
-        for j in range(1, len(row) - 1):
-            row[j] = triangle[i-1][j-1] + triangle[i-1][j]
-        
-        triangle.append(row)  # Add the row to the triangle
-    
-    return triangle
+    """ Create Pascal’s triangle """
+    pascalT = []
+    if (n > 0):
+        for i in range(n):
+            row = [1] * (i + 1)
 
-# Testing the function with the provided main block
+            if i >= 2:
+                for j in range(1, i):
+                    row[j] = pascalT[i - 1][j - 1] + pascalT[i - 1][j]
 
-def print_triangle(triangle):
-    """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
+            pascalT.append(row)
 
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
+    return pascalT
